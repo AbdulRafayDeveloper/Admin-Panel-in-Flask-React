@@ -141,121 +141,115 @@ function Page() {
             <Sidebar overview="../../admin/overview" employeeList="../../admin/employees/list"></Sidebar>
             <div className="flex-1 overflow-auto bg-gray-100">
                 <Header></Header>
-                <div className='p-4 bg-white mx-5 mt-3'>
-                    <div>
-                        <h2 className="text-2xl font-bold mb-1">Employees List</h2>
-                        <div className='flex justify-between'>
-                            <div className='flex justify-end my-2'>
-                                <Link href="../../../admin/employees/add" className='text-sm w-24 h-7 flex items-center justify-center border border-1 border-blue-500 bg-white mr-3 rounded-xl transition duration-300 ease-in-out transform hover:scale-105' passHref>
-                                    Add New
-                                    <FaPlus className="text-blue-500 ml-2 mb-0" />
-                                </Link>
-                                <button onClick={handleExportToCsv} className='text-sm flex items-center justify-center border border-1 border-blue-500 bg-white w-32 h-7 rounded-xl transition duration-300 ease-in-out transform hover:scale-105'>
-                                    Export to Csv
-                                    <FaFileExport className="text-blue-500 ml-2 mb-0" />
-                                </button>
-                            </div>
-                            <div className='flex'>
-                                <div className="">
-                                    <input
-                                        type="text"
-                                        placeholder="Search Results"
-                                        onChange={handleFilter}
-                                        className="bg-white px-2 py-1 rounded-full w-52 border border-blue-500"
-                                    />
-                                </div>
-                            </div>
-                        </div>
-                        <div className="overflow-x-auto">
-                            <table className="w-full bg-white rounded-lg shadow-3xl overflow-hidden">
-                                <thead className="sticky top-0 z-10">
-                                    <tr>
-                                        <th className="p-1 border border-gray-200">Sr#</th>
-                                        <th className="p-1 border border-gray-200">Name</th>
-                                        <th className="p-1 border border-gray-200">Email</th>
-                                        <th className="p-1 border border-gray-200">Salary</th>
-                                        <th className="p-1 border border-gray-200">Job Type</th>
-                                        <th className="p-1 border border-gray-200">Gender</th>
-                                        <th className="p-1 border border-gray-200">Pic</th>
-                                        <th className="p-1 border border-gray-200">Cv</th>
-                                        <th className="p-1 border border-gray-200">Action</th>
-                                    </tr>
-                                </thead>
-                                <tbody id="userRequestTableBody">
-                                    {displayedEmployee && displayedEmployee.map((element, index) => (
-                                        <tr className="hover:bg-gray-200">
-                                            <td className="text-center border border-gray-200">{index + 1}</td>
-                                            <td className="text-center border border-gray-200">{element.name}</td>
-                                            <td className="text-center border border-gray-200">{element.email}</td>
-                                            <td className="text-center border border-gray-200">{element.salary}</td>
-                                            <td className="text-center border border-gray-200">{element.jobType}</td>
-                                            <td className="text-center border border-gray-200">{element.gender}</td>
-                                            <td className="text-center border border-gray-200 p-1">
-                                                <Image src={`http://localhost:8000/assets/images/${element.pic}`} alt="employee pic" width={50} height={40} className='text-center mx-auto' />
-                                            </td>
-                                            <td className="text-center">
-                                                <Link
-                                                    href={`/assets/files/${element.cv}`}
-                                                    className="bg-blue-500 mx-auto text-white text-sm p-1 w-32 text-center rounded-md flex items-center justify-center"
-                                                    target="_blank"
-                                                    rel="noopener noreferrer"
-                                                    download
-                                                    onClick={(e) => {
-                                                        e.preventDefault();
-                                                        // Open the file in a new tab
-                                                        window.open(`http://localhost:8000/assets/files/${element.cv}`, '_blank');
-                                                        // Create an anchor element and trigger the download
-                                                        const link = document.createElement('a');
-                                                        // link.href = `http://localhost:8000/assets/files/${element.cv}`;
-                                                        link.setAttribute('download', element.cv);
-                                                        document.body.appendChild(link);
-                                                        link.click();
-                                                        document.body.removeChild(link);
-                                                    }}
-                                                >
-                                                    Download CV
-                                                    <FaDownload className="text-white ml-2 mb-0" />
-                                                </Link>
-                                            </td>
-                                            <td className="text-center border border-gray-200">
-                                                <div className='flex flex-row space-x-3 justify-center'>
-                                                    <Link href={`../../../admin/employees/update/${element.id}`}>
-                                                        <FaEdit className="text-blue-500 hover:text-green-800 cursor-pointer" />
-                                                    </Link>
-                                                    <button onClick={() => handleDelete(element.id)} className="text-red-600 hover:text-red-800">
-                                                        <FaTrash />
-                                                    </button>
-                                                </div>
-                                            </td>
-                                        </tr>
-                                    ))}
-                                </tbody>
-                            </table>
-                        </div>
-                        <div className="flex justify-center mt-4">
-                            <ReactPaginate
-                                previousLabel={<FaChevronLeft className="text-white ml-2 mb-0" />}
-                                nextLabel={<FaChevronRight className="text-white ml-2 mb-0" />}
-                                breakLabel={<span className="text-gray-400">...</span>}
-                                pageCount={Math.ceil(employees.length / perPage)}
-                                marginPagesDisplayed={2}
-                                pageRangeDisplayed={10} // Displaying 10 page numbers at a time
-                                onPageChange={handlePageChange}
-                                containerClassName="pagination flex" // Adding flex class to the container
-                                activeClassName="bg-blue-500 rounded-full text-white"
-                                pageClassName="relative mx-1"
-                                pageLinkClassName="block w-9 h-9 bg-blue-500 rounded-sm text-center text-white hover:bg-gray-200 focus:outline-none flex items-center justify-center"
-                                previousClassName="relative mx-1"
-                                nextClassName="relative mx-1"
-                                previousLinkClassName="block p-2 mt-1 bg-blue-500 rounded-md text-white hover:bg-gray-200 focus:outline-none"
-                                nextLinkClassName="block p-2 mt-1 bg-blue-500 rounded-md text-white hover:bg-gray-200 focus:outline-none"
-                                breakClassName="relative mx-1"
-                                breakLinkClassName="block py-2 px-3 bg-white rounded-full text-gray-700 hover:bg-gray-200 focus:outline-none"
-                            />
-                        </div>
-
+                <div className='p-4 bg-white mx-5 mt-3 rounded-lg shadow-lg'>
+            <div>
+                <h2 className="text-3xl font-medium mb-3 text-black">Employees List</h2>
+                <div className='flex justify-between items-center mb-4'>
+                    <div className='flex'>
+                        <Link href="../../../admin/employees/add" className='text-sm w-28 h-8 flex items-center justify-center border border-blue-600 bg-white mr-3 rounded-xl transition duration-300 ease-in-out transform hover:scale-105 shadow-sm' passHref>
+                            <span className='text-blue-600 font-medium'>Add New</span>
+                            <FaPlus className="text-blue-600 ml-2 mb-0" />
+                        </Link>
+                        <button onClick={handleExportToCsv} className='text-sm flex items-center justify-center border border-blue-600 bg-white w-36 h-8 rounded-xl transition duration-300 ease-in-out transform hover:scale-105 shadow-sm'>
+                            <span className='text-blue-600 font-medium'>Export to CSV</span>
+                            <FaFileExport className="text-blue-600 ml-2 mb-0" />
+                        </button>
+                    </div>
+                    <div className='flex'>
+                        <input
+                            type="text"
+                            placeholder="Search Results"
+                            onChange={handleFilter}
+                            className="bg-white px-3 py-1 rounded-full w-52 border border-blue-600 text-gray-700"
+                        />
                     </div>
                 </div>
+                <div className="overflow-x-auto">
+                    <table className="w-full bg-white rounded-lg shadow-lg overflow-hidden">
+                        <thead className="bg-blue-400">
+                            <tr>
+                                <th className="p-2 border border-gray-300">Sr#</th>
+                                <th className="p-2 border border-gray-300">Name</th>
+                                <th className="p-2 border border-gray-300">Email</th>
+                                <th className="p-2 border border-gray-300">Salary</th>
+                                <th className="p-2 border border-gray-300">Job Type</th>
+                                <th className="p-2 border border-gray-300">Gender</th>
+                                <th className="p-2 border border-gray-300">Pic</th>
+                                <th className="p-2 border border-gray-300">CV</th>
+                                <th className="p-2 border border-gray-300">Action</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {displayedEmployee && displayedEmployee.map((element, index) => (
+                                <tr className="hover:bg-gray-100">
+                                    <td className="text-center border border-gray-300 text-gray-900 p-1">{index + 1}</td>
+                                    <td className="text-center border border-gray-300 text-gray-900 p-1">{element.name}</td>
+                                    <td className="text-center border border-gray-300 text-gray-900 p-1">{element.email}</td>
+                                    <td className="text-center border border-gray-300 text-gray-900 p-1">{element.salary}</td>
+                                    <td className="text-center border border-gray-300 text-gray-900 p-1">{element.jobType}</td>
+                                    <td className="text-center border border-gray-300 text-gray-900 p-1">{element.gender}</td>
+                                    <td className="text-center border border-gray-300 p-1 text-gray-900">
+                                        <Image src={`http://localhost:8000/assets/images/${element.pic}`} alt="employee pic" width={50} height={40} className='mx-auto' />
+                                    </td>
+                                    <td className="text-center border border-gray-300 p-1 ">
+                                        <Link
+                                            href={`/assets/files/${element.cv}`}
+                                            className="bg-none mx-auto text-blue-400 border border-blue-400 text-sm p-1 w-32 text-center rounded-md flex items-center justify-center hover:bg-blue-400 hover:text-white"
+                                            target="_blank"
+                                            rel="noopener noreferrer"
+                                            download
+                                            onClick={(e) => {
+                                                e.preventDefault();
+                                                window.open(`http://localhost:8000/assets/files/${element.cv}`, '_blank');
+                                                const link = document.createElement('a');
+                                                link.setAttribute('download', element.cv);
+                                                document.body.appendChild(link);
+                                                link.click();
+                                                document.body.removeChild(link);
+                                            }}
+                                        >
+                                            Download CV
+                                            <FaDownload className="text-blue-400 ml-2 mb-0 hover:text-white" />
+                                        </Link>
+                                    </td>
+                                    <td className="text-center border border-gray-300 p-1">
+                                        <div className='flex flex-row space-x-3 justify-center'>
+                                            <Link href={`../../../admin/employees/update/${element.id}`}>
+                                                <FaEdit className="text-blue-500 hover:text-green-800 cursor-pointer" />
+                                            </Link>
+                                            <button onClick={() => handleDelete(element.id)} className="text-red-600 hover:text-red-800">
+                                                <FaTrash />
+                                            </button>
+                                        </div>
+                                    </td>
+                                </tr>
+                            ))}
+                        </tbody>
+                    </table>
+                </div>
+                <div className="flex justify-center mt-4">
+                    <ReactPaginate
+                        previousLabel={<FaChevronLeft className="text-blue-400 ml-2 mb-0" />}
+                        nextLabel={<FaChevronRight className="text-blue-400 ml-2 mb-0" />}
+                        breakLabel={<span className="text-white">...</span>}
+                        pageCount={Math.ceil(employees.length / perPage)}
+                        marginPagesDisplayed={2}
+                        pageRangeDisplayed={10}
+                        onPageChange={handlePageChange}
+                        containerClassName="pagination flex"
+                        activeClassName="bg-blue-600 rounded-full text-white"
+                        pageClassName="relative mx-1"
+                        pageLinkClassName="block w-9 h-9 bg-blue-500 rounded-sm text-center text-white hover:bg-gray-200 focus:outline-none flex items-center justify-center"
+                        previousClassName="relative mx-1"
+                        nextClassName="relative mx-1"
+                        previousLinkClassName="block p-2 mt-1 bg-blue-500 rounded-md text-white hover:bg-gray-200 focus:outline-none"
+                        nextLinkClassName="block p-2 mt-1 bg-blue-500 rounded-md text-white hover:bg-gray-200 focus:outline-none"
+                        breakClassName="relative mx-1"
+                        breakLinkClassName="block py-2 px-3 bg-white rounded-full text-gray-700 hover:bg-gray-200 focus:outline-none"
+                    />
+                </div>
+            </div>
+        </div>
             </div>
         </div>
     );

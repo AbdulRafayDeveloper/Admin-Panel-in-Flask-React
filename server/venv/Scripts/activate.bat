@@ -8,7 +8,7 @@ if defined _OLD_CODEPAGE (
     "%SystemRoot%\System32\chcp.com" 65001 > nul
 )
 
-set VIRTUAL_ENV=D:\New Technologies\flask+next.js\server\venv
+set VIRTUAL_ENV=C:\Users\PMLS\Downloads\project_emp\employee\server\venv
 
 if not defined PROMPT set PROMPT=$P$G
 

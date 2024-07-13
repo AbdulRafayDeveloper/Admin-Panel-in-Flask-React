@@ -83,60 +83,59 @@ function Page() {
     return (
 
         <div className="flex flex-col md:flex-row h-screen">
-            <Sidebar overview="../../../../admin/overview" employeeList="../../../../admin/employees/list"></Sidebar>
+            <Sidebar overview="../../../../admin/overview" employeeList="../../../../admin/"></Sidebar>
             <div className="flex-1 overflow-auto bg-gray-100">
                 <Header></Header>
                 <div className='p-1'>
                     <div className='mx-auto max-w-[1025px]'>
-                        <form onSubmit={handleSubmit} name="employeeForm" id="employeeForm" class="bg-white shadow-md rounded px-12 pb-4 mb-4 py-2 mt-2"
-                            method="post" enctype="multipart/form-data">
-                            <h1 className='text-2xl font-semibold text-center pb-7'>Add New Employee</h1>
+                        <form onSubmit={handleSubmit} name="employeeForm" id="employeeForm" className="bg-white shadow-md rounded px-12 pb-4 mb-4 py-2 mt-2"
+                            method="post" encType="multipart/form-data">
+                            <h1 className='text-2xl font-medium text-center pb-7 text-gray-800 '>Add New Employee</h1>
                             <div className='flex flex-row justify-between space-x-10 mb-4'>
-                                <div class="flex-1">
-                                    <label class="block text-gray-700 text-sm font-bold mb-2" for="username">
+                                <div className="flex-1">
+                                    <label className="block text-gray-700 text-base font-semibold mb-2" htmlFor="name">
                                         Name
                                     </label>
                                     <input
                                         type="text"
-                                        class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+                                        className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
                                         name="name"
                                         id="name"
                                         onChange={(e) => setFormData({ ...formdata, name: e.target.value })}
                                         placeholder="Enter Employee Name" />
                                 </div>
-                                <div class="flex-1">
-                                    <label class="block text-gray-700 text-sm font-bold mb-2" for="username">
+                                <div className="flex-1">
+                                    <label className="block text-gray-700 text-base font-semibold mb-2" htmlFor="email">
                                         Email
                                     </label>
                                     <input
                                         type="email"
-                                        class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+                                        className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
                                         name="email"
                                         id="email"
                                         onChange={(e) => setFormData({ ...formdata, email: e.target.value })}
                                         placeholder="Enter Employee Email" />
-
                                 </div>
                             </div>
                             <div className='flex flex-row justify-between space-x-10 mb-4'>
-                                <div class="flex-1">
-                                    <label class="block text-gray-700 text-sm font-bold mb-2" for="username">
+                                <div className="flex-1">
+                                    <label className="block text-gray-700 text-base font-semibold mb-2" htmlFor="salary">
                                         Salary
                                     </label>
                                     <input
                                         type="number"
-                                        class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+                                        className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
                                         name="salary"
                                         id="salary"
                                         onChange={(e) => setFormData({ ...formdata, salary: e.target.value })}
                                         placeholder="Enter Employee Salary" />
                                 </div>
-                                <div class="flex-1">
-                                    <label class="block text-gray-700 text-sm font-bold mb-2" for="username">
+                                <div className="flex-1">
+                                    <label className="block text-gray-700 text-base font-semibold mb-2" htmlFor="jobType">
                                         Job Type
                                     </label>
                                     <select
-                                        class="appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+                                        className="appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
                                         name="jobType"
                                         id="jobType"
                                         onChange={(e) => setFormData({ ...formdata, jobType: e.target.value })}
@@ -149,7 +148,7 @@ function Page() {
                             </div>
                             <div className='flex flex-row justify-between space-x-10 mb-2'>
                                 <div className="flex-1 flex-row">
-                                    <label className="block text-gray-700 text-sm font-bold mb-2">
+                                    <label className="block text-gray-700 text-base font-semibold mb-2">
                                         Gender
                                     </label>
                                     <div className="flex items-center">
@@ -160,7 +159,7 @@ function Page() {
                                             value="Male"
                                             checked={formdata.gender === "Male"}
                                             onChange={(e) => setFormData({ ...formdata, gender: e.target.value })}
-                                        /> Male
+                                        /> <span className='text-black font-light'>Male</span>
                                         <input
                                             type="radio"
                                             className="shadow ml-12 mx-3"
@@ -168,17 +167,16 @@ function Page() {
                                             value="Female"
                                             checked={formdata.gender === "Female"}
                                             onChange={(e) => setFormData({ ...formdata, gender: e.target.value })}
-                                        /> Female
+                                        /> <span className='text-black font-light'>Female</span>
                                     </div>
-
                                 </div>
-                                <div class="flex-1">
-                                    <label class="block text-gray-700 text-sm font-bold mb-2" for="username">
+                                <div className="flex-1">
+                                    <label className="block text-gray-700 text-base font-semibold mb-2" htmlFor="pic">
                                         Employee Pic
                                     </label>
                                     <input
                                         type="file"
-                                        class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+                                        className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
                                         name="pic"
                                         id="pic"
                                         onChange={(e) => setFormData({ ...formdata, pic: e.target.files[0] })} />
@@ -186,28 +184,29 @@ function Page() {
                             </div>
                             <div className='flex flex-row justify-between space-x-10 mb-4'>
                                 <div className="flex-1 flex-row">
-                                    <label class="block text-gray-700 text-sm font-bold mb-2" for="username">
+                                    <label className="block text-gray-700 text-base font-semibold mb-2" htmlFor="cv">
                                         Employee Cv
                                     </label>
                                     <input
                                         type="file"
-                                        class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+                                        className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
                                         name="cv"
                                         id="cv"
                                         onChange={(e) => setFormData({ ...formdata, cv: e.target.files[0] })} />
                                 </div>
-                                <div class="flex-1">
+                                <div className="flex-1">
                                 </div>
                             </div>
-                            <div className="flex items-center justify-between">
+                            <div className="flex items-center justify-end">
                                 <button
-                                    className={`bg-blue-500 text-white font-bold py-2 px-4 w-full rounded focus:outline-none focus:shadow-outline ${loading ? 'opacity-50 cursor-not-allowed' : 'hover:bg-blue-700'}`}
+                                    className={`bg-blue-600 text-white font-semibold py-2 px-4 rounded focus:outline-none focus:shadow-outline ${loading ? 'opacity-50 cursor-not-allowed' : 'hover:bg-blue-700'}`}
                                     type="submit"
                                     disabled={loading}
                                 >
                                     {loading ? 'Loading...' : 'Add Employee'}
                                 </button>
                             </div>
+
                         </form>
                     </div>
                 </div>

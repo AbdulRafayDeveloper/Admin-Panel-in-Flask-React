@@ -142,58 +142,57 @@ function page({ params }) {
                 <Header></Header>
                 <div className='p-1'>
                     <div className='mx-auto max-w-[1025px]'>
-                        <form onSubmit={handleUpdate} name="employeeForm" id="employeeForm" class="bg-white shadow-md rounded px-12 pb-4 mb-4 py-2 mt-2"
-                            method="post" enctype="multipart/form-data">
-                            <h1 className='text-2xl font-semibold text-center pb-7'>Update Employee Record</h1>
-                            <div className='flex flex-row justify-between space-x-10 mb-4'>
-                                <div class="flex-1">
-                                    <label class="block text-gray-700 text-sm font-bold mb-2" for="username">
+                        <form onSubmit={handleUpdate} name="employeeForm" id="employeeForm" className="bg-white shadow-lg rounded px-12 pb-4 mb-4 py-2 mt-2"
+                            method="post" encType="multipart/form-data">
+                            <h1 className='text-2xl font-medium text-center pb-7 text-gray-800'>Update Employee Record</h1>
+                            <div className='flex flex-row justify-between space-x-10 mb-6'>
+                                <div className="flex-1">
+                                    <label className="block text-gray-700 text-base font-semibold mb-2" htmlFor="name">
                                         Name
                                     </label>
                                     <input
                                         type="text"
-                                        class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+                                        className="shadow appearance-none border rounded w-full py-3 px-4 text-gray-800 leading-tight focus:outline-none focus:shadow-outline"
                                         name="name"
                                         id="name"
                                         value={formdata.name}
                                         onChange={(e) => setFormData({ ...formdata, name: e.target.value })}
                                         placeholder="Enter Employee Name" />
                                 </div>
-                                <div class="flex-1">
-                                    <label class="block text-gray-700 text-sm font-bold mb-2" for="username">
+                                <div className="flex-1">
+                                    <label className="block text-gray-700 text-base font-semibold mb-2" htmlFor="email">
                                         Email
                                     </label>
                                     <input
                                         type="email"
-                                        class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+                                        className="shadow appearance-none border rounded w-full py-3 px-4 text-gray-800 leading-tight focus:outline-none focus:shadow-outline"
                                         name="email"
                                         id="email"
                                         value={formdata.email}
                                         onChange={(e) => setFormData({ ...formdata, email: e.target.value })}
                                         placeholder="Enter Employee Email" />
-
                                 </div>
                             </div>
-                            <div className='flex flex-row justify-between space-x-10 mb-4'>
-                                <div class="flex-1">
-                                    <label class="block text-gray-700 text-sm font-bold mb-2" for="username">
+                            <div className='flex flex-row justify-between space-x-10 mb-6'>
+                                <div className="flex-1">
+                                    <label className="block text-gray-700 text-base font-semibold mb-2" htmlFor="salary">
                                         Salary
                                     </label>
                                     <input
                                         type="number"
-                                        class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+                                        className="shadow appearance-none border rounded w-full py-3 px-4 text-gray-800 leading-tight focus:outline-none focus:shadow-outline"
                                         name="salary"
                                         id="salary"
                                         value={formdata.salary}
                                         onChange={(e) => setFormData({ ...formdata, salary: e.target.value })}
                                         placeholder="Enter Employee Salary" />
                                 </div>
-                                <div class="flex-1">
-                                    <label class="block text-gray-700 text-sm font-bold mb-2" for="username">
+                                <div className="flex-1">
+                                    <label className="block text-gray-700 text-base font-semibold mb-2" htmlFor="jobType">
                                         Job Type
                                     </label>
                                     <select
-                                        class="appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+                                        className="shadow appearance-none border rounded w-full py-3 px-4 text-gray-800 leading-tight focus:outline-none focus:shadow-outline"
                                         name="jobType"
                                         id="jobType"
                                         value={formdata.jobType}
@@ -205,9 +204,9 @@ function page({ params }) {
                                     </select>
                                 </div>
                             </div>
-                            <div className='flex flex-row justify-between space-x-10 mb-4'>
+                            <div className='flex flex-row justify-between space-x-10 mb-6'>
                                 <div className="flex-1 flex-row">
-                                    <label className="block text-gray-700 text-sm font-bold mb-2">
+                                    <label className="block text-gray-700 text-base font-semibold mb-2">
                                         Gender
                                     </label>
                                     <div className="flex items-center">
@@ -218,7 +217,7 @@ function page({ params }) {
                                             value="Male"
                                             checked={formdata.gender === "Male"}
                                             onChange={(e) => setFormData({ ...formdata, gender: e.target.value })}
-                                        /> Male
+                                        /> <span className='font-light text-black'>Male</span>
                                         <input
                                             type="radio"
                                             className="shadow ml-12 mx-3"
@@ -226,32 +225,32 @@ function page({ params }) {
                                             value="Female"
                                             checked={formdata.gender === "Female"}
                                             onChange={(e) => setFormData({ ...formdata, gender: e.target.value })}
-                                        /> Female
+                                        /> <span className='font-light text-black'>Female</span>
                                     </div>
                                 </div>
                             </div>
-                            <div className='flex flex-row justify-between space-x-10 mb-4'>
-                                <div class="flex-1">
-                                    <label class="block text-gray-700 text-sm font-bold mb-3" for="username">
+                            <div className='flex flex-row justify-between space-x-10 mb-6'>
+                                <div className="flex-1">
+                                    <label className="block text-gray-700 text-base font-semibold mb-2" htmlFor="pic">
                                         Employee Pic
                                     </label>
                                     <input
                                         type="file"
-                                        class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+                                        className="shadow appearance-none border rounded w-full py-3 px-4 text-gray-800 leading-tight focus:outline-none focus:shadow-outline"
                                         name="pic"
                                         id="pic"
                                         files={formdata.pic}
                                         onChange={(e) => setFormData({ ...formdata, pic: e.target.files[0] })} />
-                                    <label class="block text-gray-700 text-sm font-bold mb-2 my-4" for="username">
+                                    <label className="block text-gray-700 text-base font-semibold mb-2 mt-4" htmlFor="prePic">
                                         Employee Profile
                                     </label>
                                     <Image src={`http://localhost:8000/assets/images/${formdata.prePic}`} alt="employee pic" width={200} height={200} className='mt-4' />
                                 </div>
-                                <div class="flex-1">
-                                    <div class="flex">
+                                <div className="flex-1">
+                                    <div className="flex mb-3">
                                         <div className="flex-1">
-                                            <label className="block text-gray-700 text-sm font-bold" htmlFor="username">
-                                                Employee Cv
+                                            <label className="block text-gray-700 text-base font-semibold mb-2" htmlFor="cv">
+                                                Employee CV
                                             </label>
                                         </div>
                                         <div className="flex-1 flex justify-end my-1">
@@ -263,14 +262,12 @@ function page({ params }) {
                                             </button>
                                         </div>
                                     </div>
-
                                     <input
                                         type="file"
-                                        class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+                                        className="shadow appearance-none border rounded w-full py-3 px-4 text-gray-800 leading-tight focus:outline-none focus:shadow-outline"
                                         name="cv"
                                         id="cv"
                                         onChange={(e) => setFormData({ ...formdata, cv: e.target.files[0] })} />
-
                                 </div>
                             </div>
                             <div className="text-right">
