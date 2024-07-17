@@ -6,7 +6,7 @@ import Swal from "sweetalert2";
 import axios from "axios";
 import { useRouter } from 'next/navigation';
 
-function Page() {
+function page() {
     const router = useRouter();
     const [loading, setLoading] = useState(false); // State to handle loading
     const [formdata, setFormData] = useState({
@@ -17,7 +17,7 @@ function Page() {
         gender: "",
         pic: "",
         cv: "",
-    })
+    });
 
     const handleSubmit = async (e) => {
         e.preventDefault();
@@ -78,64 +78,69 @@ function Page() {
         } finally {
             setLoading(false); // Reset loading when API call completes
         }
-    }
+    };
 
     return (
-
-        <div className="flex flex-col md:flex-row h-screen">
+        <div className="flex h-screen overflow-hidden">
             <Sidebar overview="../../../../admin/overview" employeeList="../../../../admin/"></Sidebar>
-            <div className="flex-1 overflow-auto bg-gray-100">
+            <div className="flex-1 overflow-auto relative">
                 <Header></Header>
-                <div className='p-1'>
-                    <div className='mx-auto max-w-[1025px]'>
-                        <form onSubmit={handleSubmit} name="employeeForm" id="employeeForm" className="bg-white shadow-md rounded px-12 pb-4 mb-4 py-2 mt-2"
-                            method="post" encType="multipart/form-data">
-                            <h1 className='text-2xl font-medium text-center pb-7 text-gray-800 '>Add New Employee</h1>
-                            <div className='flex flex-row justify-between space-x-10 mb-4'>
-                                <div className="flex-1">
-                                    <label className="block text-gray-700 text-base font-semibold mb-2" htmlFor="name">
-                                        Name
-                                    </label>
+                <div className='absolute inset-0'>
+                    <img
+                        src="/assets/images/background.jpg"
+                        className=' object-cover w-full h-52'
+                        alt="Background"
+                    />
+                </div>
+                <div className='relative z-20 p-4 overflow-y-auto h-full '>
+                    <div className='bg-white shadow-md rounded-lg mx-auto max-w-3xl p-8 mt-20'>
+                        <h1 className='text-2xl font-medium  text-gray-600 mb-6'>Add New Employee</h1>
+                        <form
+                            onSubmit={handleSubmit}
+                            name="employeeForm"
+                            id="employeeForm"
+                            className="space-y-4"
+                            method="post"
+                            encType="multipart/form-data"
+                        >
+                            <div className='grid grid-cols-1 md:grid-cols-2 gap-4'>
+                                <div>
+                                    <label className="block text-gray-800 font-medium text-sm mb-2" htmlFor="name">Name</label>
                                     <input
                                         type="text"
-                                        className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+                                        className="block w-full px-3 py-2 border rounded-lg text-gray-800 focus:ring focus:ring-blue-300"
                                         name="name"
                                         id="name"
                                         onChange={(e) => setFormData({ ...formdata, name: e.target.value })}
-                                        placeholder="Enter Employee Name" />
+                                        placeholder="Enter Employee Name"
+                                    />
                                 </div>
-                                <div className="flex-1">
-                                    <label className="block text-gray-700 text-base font-semibold mb-2" htmlFor="email">
-                                        Email
-                                    </label>
+                                <div>
+                                    <label className="block text-gray-800 font-medium text-sm mb-2" htmlFor="email">Email</label>
                                     <input
                                         type="email"
-                                        className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+                                        className="block w-full px-3 py-2 border rounded-lg text-gray-800 focus:ring focus:ring-blue-300"
                                         name="email"
                                         id="email"
                                         onChange={(e) => setFormData({ ...formdata, email: e.target.value })}
-                                        placeholder="Enter Employee Email" />
+                                        placeholder="Enter Employee Email"
+                                    />
                                 </div>
-                            </div>
-                            <div className='flex flex-row justify-between space-x-10 mb-4'>
-                                <div className="flex-1">
-                                    <label className="block text-gray-700 text-base font-semibold mb-2" htmlFor="salary">
-                                        Salary
-                                    </label>
+                                <div>
+                                    <label className="block text-gray-800 font-medium text-sm mb-2" htmlFor="salary">Salary</label>
                                     <input
                                         type="number"
-                                        className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+                                        className="block w-full px-3 py-2 border rounded-lg text-gray-800 focus:ring focus:ring-blue-300"
                                         name="salary"
                                         id="salary"
                                         onChange={(e) => setFormData({ ...formdata, salary: e.target.value })}
-                                        placeholder="Enter Employee Salary" />
+                                        placeholder="Enter Employee Salary"
+                                    />
                                 </div>
-                                <div className="flex-1">
-                                    <label className="block text-gray-700 text-base font-semibold mb-2" htmlFor="jobType">
-                                        Job Type
-                                    </label>
+                                <div>
+                                    <label className="block text-gray-800 font-medium text-sm mb-2" htmlFor="jobType">Job Type</label>
                                     <select
-                                        className="appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+                                        className="block w-full px-3 py-2 border rounded-lg text-gray-800 focus:ring focus:ring-blue-300"
                                         name="jobType"
                                         id="jobType"
                                         onChange={(e) => setFormData({ ...formdata, jobType: e.target.value })}
@@ -145,74 +150,71 @@ function Page() {
                                         <option value="Full Time">Full Time</option>
                                     </select>
                                 </div>
-                            </div>
-                            <div className='flex flex-row justify-between space-x-10 mb-2'>
-                                <div className="flex-1 flex-row">
-                                    <label className="block text-gray-700 text-base font-semibold mb-2">
-                                        Gender
-                                    </label>
-                                    <div className="flex items-center">
-                                        <input
-                                            type="radio"
-                                            className="shadow mx-3"
-                                            name="gender"
-                                            value="Male"
-                                            checked={formdata.gender === "Male"}
-                                            onChange={(e) => setFormData({ ...formdata, gender: e.target.value })}
-                                        /> <span className='text-black font-light'>Male</span>
-                                        <input
-                                            type="radio"
-                                            className="shadow ml-12 mx-3"
-                                            name="gender"
-                                            value="Female"
-                                            checked={formdata.gender === "Female"}
-                                            onChange={(e) => setFormData({ ...formdata, gender: e.target.value })}
-                                        /> <span className='text-black font-light'>Female</span>
+                                <div>
+                                    <label className="block text-gray-800 font-medium text-sm mb-2">Gender</label>
+                                    <div className="flex items-center space-x-3">
+                                        <label className="flex items-center">
+                                            <input
+                                                type="radio"
+                                                className="form-radio text-blue-500"
+                                                name="gender"
+                                                value="Male"
+                                                checked={formdata.gender === "Male"}
+                                                onChange={(e) => setFormData({ ...formdata, gender: e.target.value })}
+                                            />
+                                            <span className="ml-2 text-gray-800">Male</span>
+                                        </label>
+                                        <label className="flex items-center">
+                                            <input
+                                                type="radio"
+                                                className="form-radio text-blue-500"
+                                                name="gender"
+                                                value="Female"
+                                                checked={formdata.gender === "Female"}
+                                                onChange={(e) => setFormData({ ...formdata, gender: e.target.value })}
+                                            />
+                                            <span className="ml-2 text-gray-800">Female</span>
+                                        </label>
                                     </div>
                                 </div>
-                                <div className="flex-1">
-                                    <label className="block text-gray-700 text-base font-semibold mb-2" htmlFor="pic">
-                                        Employee Pic
-                                    </label>
+                                <div>
+                                    <label className="block text-gray-800 font-medium text-sm mb-2" htmlFor="pic">Employee Pic</label>
                                     <input
                                         type="file"
-                                        className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+                                        className="block w-full px-3 py-2 border rounded-lg text-gray-800 focus:ring focus:ring-blue-300"
                                         name="pic"
                                         id="pic"
-                                        onChange={(e) => setFormData({ ...formdata, pic: e.target.files[0] })} />
+                                        onChange={(e) => setFormData({ ...formdata, pic: e.target.files[0] })}
+                                    />
                                 </div>
-                            </div>
-                            <div className='flex flex-row justify-between space-x-10 mb-4'>
-                                <div className="flex-1 flex-row">
-                                    <label className="block text-gray-700 text-base font-semibold mb-2" htmlFor="cv">
-                                        Employee Cv
-                                    </label>
+                                <div>
+                                    <label className="block text-gray-800 font-medium text-sm mb-2" htmlFor="cv">Employee CV</label>
                                     <input
                                         type="file"
-                                        className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+                                        className="block w-full px-3 py-2 border rounded-lg text-gray-800 focus:ring focus:ring-blue-300"
                                         name="cv"
                                         id="cv"
-                                        onChange={(e) => setFormData({ ...formdata, cv: e.target.files[0] })} />
-                                </div>
-                                <div className="flex-1">
+                                        onChange={(e) => setFormData({ ...formdata, cv: e.target.files[0] })}
+                                    />
                                 </div>
                             </div>
-                            <div className="flex items-center justify-end">
+                            <div className="flex justify-end mt-4">
                                 <button
-                                    className={`bg-blue-600 text-white font-semibold py-2 px-4 rounded focus:outline-none focus:shadow-outline ${loading ? 'opacity-50 cursor-not-allowed' : 'hover:bg-blue-700'}`}
+                                    className={`bg-transparent border border-gray-400 text-gray-600 py-2 px-4 rounded-sm hover:bg-gray-500 hover:text-white focus:outline-none focus:shadow-outline transition duration-300 ease-in-out ${loading ? 'opacity-50 cursor-not-allowed' : 'hover:bg-blue-700'}`}
                                     type="submit"
                                     disabled={loading}
                                 >
-                                    {loading ? 'Loading...' : 'Add Employee'}
+                                    {loading ? (
+                                        <svg className="animate-spin h-5 w-5 mr-3 ..." viewBox="0 0 24 24"></svg>
+                                    ) : 'Add Employee'}
                                 </button>
                             </div>
-
                         </form>
                     </div>
                 </div>
             </div>
         </div>
-    )
+    );
 }
 
-export default Page
+export default page;

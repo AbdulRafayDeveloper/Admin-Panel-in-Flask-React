@@ -1,5 +1,5 @@
-import React from 'react'
-import Link from "next/link"
+import React from 'react';
+import Link from "next/link";
 import Swal from 'sweetalert2';
 import { useRouter } from 'next/navigation';
 
@@ -11,7 +11,7 @@ function Header() {
             icon: "success",
             title: "Logout",
             text: "Your account has been logged out.",
-            confirmButtonText: "OK", // Button text to confirm
+            confirmButtonText: "OK",
         }).then(() => {
             localStorage.removeItem('token');
             router.push("../../auth/login");
@@ -19,23 +19,26 @@ function Header() {
     }
 
     return (
-        <header>
-            <nav className="bg-white border-gray-200 px-4 lg:px-6 py-3 mx-5 rounded-lg my-1 shadow-md">
-                <div className="max-w-screen-xl mx-auto flex justify-between items-center">
-                    <div className="hidden lg:flex lg:space-x-8">
-                        <ul className="flex flex-col lg:flex-row font-medium">
-                            <li>
-                                <Link href="#" className="text-2xl font-medium text-blue-600">Digital Solutions:
-                                    <span className="text-lg font-light text-gray-700"> Helps in growing the businesses</span>
-                                </Link>
-                            </li>
-                        </ul>
-                    </div>
-                    <Link href="#" onClick={handleLogout} className="text-blue-600 border border-blue-600 font-medium bg-white py-1 px-4 rounded-md hover:bg-blue-600 hover:text-white transition duration-300 ease-in-out" id="logoutButton">Log Out</Link>
+        <header className="fixed top-0 left-0 right-0 bg-white shadow-md z-50">
+            <nav className="container mx-auto p-4 flex justify-between items-center">
+                <div className="flex items-center space-x-4">
+                    <Link href="/">
+                        <div className="flex items-center space-x-2">
+                            <div className="text-xl font-medium text-gray-600">Digital Solutions</div>
+                            <div className="text-sm font-light text-gray-700">Helps in growing businesses</div>
+                        </div>
+                    </Link>
                 </div>
+                <button
+                    onClick={handleLogout}
+                    className="bg-transparent border border-gray-400 text-gray-600 font- py-2 px-4 rounded-sm hover:bg-gray-500 hover:text-white focus:outline-none focus:shadow-outline transition duration-300 ease-in-out"
+                    id="logoutButton"
+                >
+                    Log Out
+                </button>
             </nav>
         </header>
-    )
+    );
 }
 
-export default Header
+export default Header;

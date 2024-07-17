@@ -1,36 +1,43 @@
-"use client";
-
-import React from 'react';
+'use client'
+import React, { useState, useEffect } from 'react';
 import { FaUsers, FaComments, FaDollarSign } from 'react-icons/fa';
 import { Line, Pie, Bar } from 'react-chartjs-2';
 import Header from '../components/Header';
+import Calendar from 'react-calendar';
+import 'react-calendar/dist/Calendar.css';
+import Sidebar from '../components/Sidebar';
 import {
   Chart as ChartJS,
-  CategoryScale,
-  LinearScale,
-  PointElement,
-  BarElement,
-  LineElement,
-  ArcElement,
   Title,
   Tooltip,
   Legend,
-} from 'chart.js';
-import Sidebar from '../components/Sidebar';
-
-ChartJS.register(
+  ArcElement,
   CategoryScale,
   LinearScale,
   PointElement,
   BarElement,
-  LineElement,
-  ArcElement,
+  LineElement
+} from 'chart.js';
+
+ChartJS.register(
   Title,
   Tooltip,
-  Legend
+  Legend,
+  ArcElement,
+  CategoryScale,
+  LinearScale,
+  PointElement,
+  BarElement,
+  LineElement
 );
 
 const DashboardOverview = () => {
+  const [selectedDate, setSelectedDate] = useState(new Date());
+
+  const handleDateChange = (date) => {
+    setSelectedDate(date);
+  };
+
   const lineData = {
     labels: ['January', 'February', 'March', 'April', 'May', 'June', 'July'],
     datasets: [
@@ -96,6 +103,15 @@ const DashboardOverview = () => {
         text: 'Monthly Earnings',
       },
     },
+    scales: {
+      x: {
+        type: 'category',
+      },
+      y: {
+        type: 'linear',
+        beginAtZero: true,
+      },
+    },
   };
 
   const pieOptions = {
@@ -116,13 +132,14 @@ const DashboardOverview = () => {
   };
 
   return (
-    <div className="flex flex-col md:flex-row h-screen">
+    <div className="flex flex-col md:flex-row h-screen overflow-hidden">
       <Sidebar overview="../../admin/overview" employeeList="../../admin/employees/list" />
       <div className="flex-1 overflow-auto bg-gray-100">
         <Header />
-        <div className="p-6">
-          <div className="bg-white p-6 shadow-lg">
-            <h2 className="text-2xl font-medium mb-8 text-blue-600">Dashboard Overview</h2>
+        <div className="p-6 h-full mt-14">
+          <div className="p-4">
+            <h2 className="text-2xl font-medium text-gray-600 mb-2">Dashboard Overview</h2>
+            <p className='font-light mt-1 mb-8'>Main / Overview</p>
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-8">
               <div className="bg-white rounded-lg shadow-md p-4 text-center flex flex-col items-center">
                 <FaUsers className="text-3xl text-blue-400 mb-2" />
@@ -149,23 +166,39 @@ const DashboardOverview = () => {
               <div className="bg-white rounded-lg shadow-lg p-6">
                 <h3 className="text-lg font-semibold mb-4 text-blue-600">Monthly Earnings</h3>
                 <div className="h-80">
-                  <Line data={lineData} options={options} height={600} width={700} />
+                  <Line data={lineData} options={options} height={400} width={500} />
                 </div>
               </div>
               <div className="bg-white rounded-lg shadow-lg p-6">
                 <h3 className="text-lg font-semibold mb-4 text-blue-600">Sales Distribution</h3>
-                <Pie data={pieData} options={pieOptions} />
+                <div className="h-80">
+                  <Pie data={pieData} options={pieOptions} />
+                </div>
               </div>
             </div>
-            <div className="bg-white rounded-lg shadow-lg p-6 mb-8">
-              <h3 className="text-lg font-semibold mb-4 text-blue-600">Monthly Sales</h3>
-              <Bar data={barData} options={options} />
+            <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 mb-8">
+              <div className="bg-white rounded-lg shadow-lg p-6">
+                <h3 className="text-lg font-semibold mb-4 text-blue-600">Monthly Sales</h3>
+                <div className="h-80">
+                  <Bar data={barData} options={options} height={500} width={800} />
+                </div>
+              </div>
+              <div className="bg-white rounded-lg shadow-lg p-6">
+                <h3 className="text-lg font-semibold mb-4 text-blue-600">Calendar</h3>
+                <div className="h-80">
+                  <Calendar
+                    onChange={handleDateChange}
+                    value={selectedDate}
+                    className="react-calendar"
+                  />
+                </div>
+              </div>
             </div>
           </div>
         </div>
       </div>
     </div>
   );
-}
+};
 
 export default DashboardOverview;
