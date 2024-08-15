@@ -83,7 +83,7 @@ function Page() {
     return (
 
         <div className="flex flex-col md:flex-row h-screen">
-            <Sidebar overview="../../../../admin/overview" employeeList="../../../../admin/"></Sidebar>
+            <Sidebar overview="../../../../admin/overview" employeeList="../../../../admin"></Sidebar>
             <div className="flex-1 overflow-auto bg-gray-100">
                 <Header></Header>
                 <div className='p-1'>
