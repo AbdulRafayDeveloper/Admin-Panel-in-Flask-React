@@ -3,22 +3,26 @@ import Link from "next/link";
 import Image from "next/image";
 import { FaUsers } from 'react-icons/fa';
 
-function Sidebar({overview,employeeList}) {
+function Sidebar({ overview, employeeList }) {
     return (
-        <div className='my-1'>
-            <nav className="bg-white text-black w-full lg:w-full md:w-full h-full p-6 rounded-lg shadow-lg">
-                <div className="flex items-center justify-between mb-8">
-                    <div className="text-xl font-semibold px-3 text-blue-600">Dashboard</div>
-                    <Image src={`/next.svg`} alt="Logo" className="w-10 h-10 rounded-full bg-gray-300" width={40} height={40} />
+        <div className='h-full'>
+            <nav className="bg-white text-gray-800 w-full lg:w-64 md:w-64 h-full p-6 shadow-lg  mt-24 rounded-lg">
+                <div className="flex items-center justify-center mb-10">
+                    <div className="flex items-center justify-center bg-gray-300 rounded-full p-2">
+                        <Image src={`/next.svg`} alt="Logo" width={60} height={60} />
+                    </div>
                 </div>
-                <ul className="space-y-6 mt-16">
-                    <li className="flex items-center space-x-3">
-                        <FaUsers className="text-yellow-400" size={20} />
-                        <Link href={overview} className="hover:text-blue-500 text-lg font-light">Overview</Link>
+                <ul className="space-y-4 pt-6 pl-8">
+                    <li className="flex items-center space-x-3 ">
+                        <p className='font-normal text-gray-800'>Main</p>
                     </li>
-                    <li className="flex items-center space-x-3">
-                        <FaUsers className="text-red-500" size={20} />
-                        <Link href={employeeList} className="hover:text-blue-500 text-lg font-light">Employees</Link>
+                    <li className="flex items-center space-x-3 ">
+                        <FaUsers className="text-gray-400" size={20} />
+                        <Link href={overview} className="hover:text-gray-400 text-lg font-medium transition duration-200 ease-in-out">Overview</Link>
+                    </li>
+                    <li className="flex items-center space-x-3 ">
+                        <FaUsers className="text-gray-400" size={20} />
+                        <Link href={employeeList} className="hover:text-gray-400 text-lg font-medium transition duration-200 ease-in-out">Employees</Link>
                     </li>
                 </ul>
             </nav>

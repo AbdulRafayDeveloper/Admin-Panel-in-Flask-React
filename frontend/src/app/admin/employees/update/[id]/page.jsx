@@ -136,23 +136,32 @@ function page({ params }) {
     };
 
     return (
-        <div className="flex flex-col md:flex-row h-screen">
-            <Sidebar overview="../../../../admin/overview" employeeList="../../../../admin/employees/list"></Sidebar>
-            <div className="flex-1 overflow-auto bg-gray-100">
+        <div className="flex h-screen overflow-hidden">
+            <Sidebar overview="../../../../admin/overview" employeeList="../../../../admin/"></Sidebar>
+            <div className="flex-1 overflow-auto relative">
                 <Header></Header>
-                <div className='p-1'>
-                    <div className='mx-auto max-w-[1025px]'>
-                        <form onSubmit={handleUpdate} name="employeeForm" id="employeeForm" className="bg-white shadow-lg rounded px-12 pb-4 mb-4 py-2 mt-2"
+                <div className='absolute inset-0'>
+                    <img
+                        src="/assets/images/background.jpg"
+                        className=' object-cover w-full h-52'
+                        alt="Background"
+                    />
+                </div>
+                <div className='relative z-20 p-4 overflow-y-auto h-full '>
+                    <div className='bg-white shadow-md rounded-lg mx-auto max-w-3xl p-8 mt-20'>
+                        <h1 className='text-2xl font-medium text-gray-600 mb-2'>Update Employee</h1>
+                        <p className='font-light mt-1'>Main / <span><Link href="../../../../admin/employees/list">Employees</Link></span> / Update</p>
+                        <form onSubmit={handleUpdate} name="employeeForm" id="employeeForm" className="bg-white px-12 pb-4 mb-4 py-2 mt-2"
                             method="post" encType="multipart/form-data">
-                            <h1 className='text-2xl font-medium text-center pb-7 text-gray-800'>Update Employee Record</h1>
+                        
                             <div className='flex flex-row justify-between space-x-10 mb-6'>
                                 <div className="flex-1">
-                                    <label className="block text-gray-700 text-base font-semibold mb-2" htmlFor="name">
+                                    <label className="block text-gray-800 font-medium text-sm mb-2" htmlFor="name">
                                         Name
                                     </label>
                                     <input
                                         type="text"
-                                        className="shadow appearance-none border rounded w-full py-3 px-4 text-gray-800 leading-tight focus:outline-none focus:shadow-outline"
+                                        className="block w-full px-3 py-2 border rounded-lg text-gray-800 focus:ring focus:ring-blue-300"
                                         name="name"
                                         id="name"
                                         value={formdata.name}
@@ -160,12 +169,12 @@ function page({ params }) {
                                         placeholder="Enter Employee Name" />
                                 </div>
                                 <div className="flex-1">
-                                    <label className="block text-gray-700 text-base font-semibold mb-2" htmlFor="email">
+                                    <label className="block text-gray-800 font-medium text-sm mb-2" htmlFor="email">
                                         Email
                                     </label>
                                     <input
                                         type="email"
-                                        className="shadow appearance-none border rounded w-full py-3 px-4 text-gray-800 leading-tight focus:outline-none focus:shadow-outline"
+                                        className="block w-full px-3 py-2 border rounded-lg text-gray-800 focus:ring focus:ring-blue-300"
                                         name="email"
                                         id="email"
                                         value={formdata.email}
@@ -175,12 +184,12 @@ function page({ params }) {
                             </div>
                             <div className='flex flex-row justify-between space-x-10 mb-6'>
                                 <div className="flex-1">
-                                    <label className="block text-gray-700 text-base font-semibold mb-2" htmlFor="salary">
+                                    <label className="block text-gray-800 font-medium text-sm mb-2" htmlFor="salary">
                                         Salary
                                     </label>
                                     <input
                                         type="number"
-                                        className="shadow appearance-none border rounded w-full py-3 px-4 text-gray-800 leading-tight focus:outline-none focus:shadow-outline"
+                                        className="block w-full px-3 py-2 border rounded-lg text-gray-800 focus:ring focus:ring-blue-300"
                                         name="salary"
                                         id="salary"
                                         value={formdata.salary}
@@ -188,7 +197,7 @@ function page({ params }) {
                                         placeholder="Enter Employee Salary" />
                                 </div>
                                 <div className="flex-1">
-                                    <label className="block text-gray-700 text-base font-semibold mb-2" htmlFor="jobType">
+                                    <label className="block text-gray-800 font-medium text-sm mb-2" htmlFor="jobType">
                                         Job Type
                                     </label>
                                     <select
@@ -206,7 +215,7 @@ function page({ params }) {
                             </div>
                             <div className='flex flex-row justify-between space-x-10 mb-6'>
                                 <div className="flex-1 flex-row">
-                                    <label className="block text-gray-700 text-base font-semibold mb-2">
+                                    <label className="block text-gray-800 font-medium text-sm mb-2">
                                         Gender
                                     </label>
                                     <div className="flex items-center">
@@ -231,17 +240,17 @@ function page({ params }) {
                             </div>
                             <div className='flex flex-row justify-between space-x-10 mb-6'>
                                 <div className="flex-1">
-                                    <label className="block text-gray-700 text-base font-semibold mb-2" htmlFor="pic">
+                                    <label className="block text-gray-800 font-medium text-sm mb-2" htmlFor="pic">
                                         Employee Pic
                                     </label>
                                     <input
                                         type="file"
-                                        className="shadow appearance-none border rounded w-full py-3 px-4 text-gray-800 leading-tight focus:outline-none focus:shadow-outline"
+                                        className="block w-full px-3 py-2 border rounded-lg text-gray-800 focus:ring focus:ring-blue-300"
                                         name="pic"
                                         id="pic"
                                         files={formdata.pic}
                                         onChange={(e) => setFormData({ ...formdata, pic: e.target.files[0] })} />
-                                    <label className="block text-gray-700 text-base font-semibold mb-2 mt-4" htmlFor="prePic">
+                                    <label className="block text-gray-800 font-medium text-sm mb-2 mt-6" htmlFor="prePic">
                                         Employee Profile
                                     </label>
                                     <Image src={`http://localhost:8000/assets/images/${formdata.prePic}`} alt="employee pic" width={200} height={200} className='mt-4' />
@@ -249,7 +258,7 @@ function page({ params }) {
                                 <div className="flex-1">
                                     <div className="flex mb-3">
                                         <div className="flex-1">
-                                            <label className="block text-gray-700 text-base font-semibold mb-2" htmlFor="cv">
+                                            <label className="block text-gray-800 font-medium text-sm mb-2" htmlFor="cv">
                                                 Employee CV
                                             </label>
                                         </div>
@@ -264,7 +273,7 @@ function page({ params }) {
                                     </div>
                                     <input
                                         type="file"
-                                        className="shadow appearance-none border rounded w-full py-3 px-4 text-gray-800 leading-tight focus:outline-none focus:shadow-outline"
+                                        className="block w-full px-3 py-2 border rounded-lg text-gray-800 focus:ring focus:ring-blue-300"
                                         name="cv"
                                         id="cv"
                                         onChange={(e) => setFormData({ ...formdata, cv: e.target.files[0] })} />
@@ -272,7 +281,7 @@ function page({ params }) {
                             </div>
                             <div className="text-right">
                                 <button
-                                    className={`text-center bg-blue-500 text-white font-bold py-2 px-4 w-48 rounded focus:outline-none focus:shadow-outline ${loading ? 'opacity-50 cursor-not-allowed' : 'hover:bg-blue-700'}`}
+                                    className={`bg-transparent border border-gray-400 text-gray-600 font- py-2 px-4 rounded-sm hover:bg-gray-500 hover:text-white focus:outline-none focus:shadow-outline transition duration-300 ease-in-out${loading ? 'opacity-50 cursor-not-allowed' : 'hover:bg-blue-700'}`}
                                     type="submit"
                                     disabled={loading}
                                 >
