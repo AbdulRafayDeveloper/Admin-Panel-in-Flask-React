@@ -82,7 +82,7 @@ function page() {
 
     return (
         <div className="flex h-screen overflow-hidden">
-            <Sidebar overview="../../../../admin/overview" employeeList="../../../../admin/"></Sidebar>
+            <Sidebar overview="../../../../admin/overview" employeeList="../../../../admin/" cvDetection="../../../admin/cvDetect/add></Sidebar>
             <div className="flex-1 overflow-auto relative">
                 <Header></Header>
                 <div className='absolute inset-0'>

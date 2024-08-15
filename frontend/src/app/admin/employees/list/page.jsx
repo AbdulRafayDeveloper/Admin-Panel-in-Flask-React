@@ -140,8 +140,8 @@ function Page() {
             <Sidebar overview="../../admin/overview" employeeList="../../admin/employees/list" />
             <div className="flex-1 overflow-auto bg-gray-100">
                 <Header />
-                <div className='p-4 mx-5 mt-24  md:mx-2 sm:mx-1'>
-                    <div className='mb-6'>
+                <div className='p-4 mx-5 mt-16 md:mx-2 sm:mx-1'>
+                    <div className='mb-3'>
                         <h2 className="text-2xl font-medium text-gray-600  mt-2">Employees List</h2>
                         <p className='font-light mt-1'>Main / Employees</p>
                     </div>

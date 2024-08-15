@@ -1,4 +1,4 @@
-from flask import Blueprint, jsonify,request,g
+from flask import Blueprint, jsonify, request, g, current_app  # Added current_app
 import MySQLdb
 ### for images and files ###
 import os
